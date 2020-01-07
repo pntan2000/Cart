@@ -1,6 +1,6 @@
 # Cart
 
-public void addSanPham(CartSP sp) {
+    public void addSanPham(CartSP sp) {
         int key = sp.getSp().getId();
         if (this.containsKey(key)) {
             int sl = ((CartSP)this.get(key)).getSoluong();
