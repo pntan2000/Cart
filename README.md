@@ -198,4 +198,27 @@
                                 </c:forEach>
                                 </tbody>
                             </c:if>
-    
+    ---Login Giohang
+                Gson gson = new Gson();
+                cartlist = gson.fromJson(tv.getGiohang(), new TypeToken<List<Giohang>>() {
+                }.getType());
+                HttpSession session = request.getSession(true);
+                Cart shop = (Cart) session.getAttribute("SHOP");
+                if (shop == null) {
+                    shop = new Cart();
+                }
+                for (Giohang cat : cartlist) {
+                    int a = cat.getMasp();
+                    String b = cat.getTen();
+                    String c = cat.getTtin();
+                    String d = cat.getGia();
+                    String e = cat.getSoluong();
+                    String f = cat.getSoluongmua();
+                    String g = cat.getAnh();
+                    Sanpham s = new Sanpham(a, b, c, d, e, g);
+                    CartSP sp = new CartSP(s, Integer.parseInt(f));
+                    cart.add(sp);
+                    shop.addSanpham(sp, Integer.parseInt(f));
+                }
+
+                session.setAttribute("SHOP", shop);
